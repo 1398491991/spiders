@@ -12,11 +12,9 @@ from publicConfig import houseTypeDict
 from publicConfig import houseAreaParseTuple
 from datetime import datetime
 from imageStreamParse import sava_picture
-from imageStreamParse import myGetHtml
 import uuid
 import MySQLdb
-import random
-from spidersSet.settings import USER_AGENTS
+
 
 
 def existNewCommunityTable(cur,tableName):
@@ -29,7 +27,6 @@ def existNewCommunityTable(cur,tableName):
 #链接数据库
 def connectDataBase(userConnectName=''):
     try:
-        # print u'\n------------------------ Init %s ----------------------\n'%userConnectName
         conn=MySQLdb.connect(**dataBaseConfig)
         print u'\n---------------------- %s ConnectDataBase Succeed ----------------------\n'%userConnectName
         return conn
@@ -173,7 +170,7 @@ def kaipanTimeParse(kaipanTime,**kwargs):
                     continue
         return None
     elif not kaipanTime:
-        return N
+        return None
     elif isinstance(kaipanTime,(list,tuple)):
         kaipanTime=filter(lambda x:x,map(kaipanTimeParse,kaipanTime))
         if kaipanTime:

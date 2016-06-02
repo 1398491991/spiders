@@ -16,14 +16,11 @@ from publicProcedureSet.dataStreamParse import acquireGeographyCoordinates
 from publicProcedureSet.dataStreamParse import nowTime
 from publicProcedureSet.dataStreamParse import initTableId
 from publicProcedureSet.dataStreamParse import existNewCommunityTable
-from publicProcedureSet import publicConfig
+from publicProcedureSet.publicConfig import init_location_community_id,\
+    init_ifuwo_houselayout_id,\
+    init_ifuwoext_houselayoutext_id
 
-config=publicConfig.__dict__
-
-init_location_community_id=config.get(u'init_location_community_id',1)
-init_ifuwo_houselayout_id=config.get(u'init_ifuwo_houselayout_id',1)
-init_ifuwoext_houselayoutext_id=config.get(u'init_ifuwoext_houselayoutext_id',1)
-newComunityTable=config.get(u'newComunity',u'location_community')
+from publicProcedureSet.publicConfig import newComunityTable  #保存楼盘信息的表
 
 class SpiderssetPipeline(object):
     def __init__(self):

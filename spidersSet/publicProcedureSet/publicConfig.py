@@ -55,7 +55,7 @@ init_ifuwo_houselayout_id=2121012+300
 init_ifuwoext_houselayoutext_id=1511286+300
 ##
 # 楼盘表是否要保存到新的表
-newComunity='location_community_copy'
+newComunityTable='location_community_copy'
 
 
 #匹配级别（0 中国，1 省，2 地级市，3 县，4 乡镇，5街道，6 小区，7 具体的POI，8 门牌号级别，-1 查询失败）
