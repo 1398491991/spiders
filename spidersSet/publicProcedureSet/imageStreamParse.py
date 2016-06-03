@@ -70,9 +70,9 @@ def sava_picture(Url,ml,a,spiderName):
     if not judgeImgUrl(Url):  # 判断图片是否符合 png jpg 等格式
         return False
     if ml==1:
-        name1='basemap.jpg'
+        name1=u'basemap.jpg'
     else:
-        name1='cover.jpg'
+        name1=u'cover.jpg'
     ad=os.path.join(saveHouseImgPath,spiderName)
     folder_name =filename2sid(a)
     addrs=os.path.join(ad,folder_name,a)##存放路径
@@ -87,12 +87,12 @@ def sava_picture(Url,ml,a,spiderName):
         filename.write(img_bytes)
         filename.close()
         if ml==1:
-            thumbnail_path=os.path.join(addrs,'thumbnail.jpg')
+            thumbnail_path=os.path.join(addrs,u'thumbnail.jpg')
             print u'\nimgType : 户型图   imgSavePath : %s   imgUrl : %s' \
                     u'\n'%(thumbnail_path,Url)
             imgParse(img_bytes,thumbnail_path,[480,480])
         else:
-            cover_path=os.path.join(addrs,'cover.jpg.small.jpg')
+            cover_path=os.path.join(addrs,u'cover.jpg.small.jpg')
             print u'\nimgType : 封面图   imgSavePath : %s   imgUrl : %s' \
                     u'\n'%(cover_path,Url)
             imgParse(img_bytes,cover_path,[180,100])

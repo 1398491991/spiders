@@ -338,6 +338,8 @@ def normCityAreaName(City_or_Area,**kwargs):## 规范 选城市 和 区域 名
             City_or_Area=City_or_Area.replace(RE,'')
         return City_or_Area
             # raise ValueError(u'------------------ normCityAreaName arg : type  ValueError -----------------')
+    elif not City_or_Area:
+        return False
     elif isinstance(City_or_Area,(list,tuple)):
         return map(lambda x:normCityAreaName(x),City_or_Area)
     else:
