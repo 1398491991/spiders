@@ -10,6 +10,8 @@ from cStringIO import StringIO as BytesIO
 import random
 from spidersSet.settings import USER_AGENTS
 def myGetHtml(url,return_type='text',timeout=30):
+    if not url:
+        return False
     try:
         html=requests.get(url,timeout=timeout,headers={'User-Agent':random.choice(USER_AGENTS)})
         if return_type=='text':

@@ -39,6 +39,8 @@ class XinlangSpider(spiderBase):
                 continue
             items=SpiderssetItem()
             items['cityName']=cityName
+            items['spidersName']=self.name
+            items['comNumber']=self.comNumber
             # cityStartUrl=cityStartUrl_list[i]+'/loupan/'
             # items['cityStartUrl']=cityStartUrl
             yield Request(cityStartUrl_list[i],callback=self.communityListUrlParse,meta={'items':items})
@@ -112,6 +114,8 @@ class XinlangSpider(spiderBase):
         #http://data.house.sina.com.cn/sh131543/xinxi/#wt_source=nlpxq_dh2_xxxx
         items['communityHouseTypeUrl']=response.xpath('//div[@class="w_header03"]/ul[1]/li[4]/a/@href').extract_first()
         # http://data.house.sina.com.cn/sh131543/pic/#wt_source=nlpxq_dh2_zxtp
+        if not items['communityDetailUrl']:
+            return
 
         yield Request(items['communityDetailUrl'],callback=self.communityDetailParse,meta={'items':items})
 
@@ -140,7 +144,11 @@ class XinlangSpider(spiderBase):
         items['jiaotong_bus']=jiaotong_bus
         items['kaifashang']=kaifashang
         items['jieshao']=jieshao
-        yield Request(items['communityHouseTypeUrl'],callback=self.communityHouseTypeParse,meta={'items':items})
+        if not  items['communityHouseTypeUrl']:
+            print items
+            yield items
+        else:
+            yield Request(items['communityHouseTypeUrl'],callback=self.communityHouseTypeParse,meta={'items':items})
 
 
     def communityHouseTypeParse(self,response):
@@ -168,8 +176,6 @@ class XinlangSpider(spiderBase):
         items['houseImgUrl_list']=houseImgUrl_list
         items['houseType_list']=houseType_list
         items['houseArea_list']=houseArea_list
-        items['spidersName']=self.name
-        items['comNumber']=self.comNumber
         print items
         yield items
 

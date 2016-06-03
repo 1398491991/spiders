@@ -26,6 +26,11 @@ def existNewCommunityTable(cur,tableName):
 
 #链接数据库
 def connectDataBase(userConnectName=''):
+    db=dataBaseConfig.get('db')
+    if db=='test_database':
+        print u'------------------------- 你用的是 “ 测试数据库 %s ” ------------------'%db
+    if db=='ifuwo':
+        print u'------------------------- 你用的是 “ 正式数据库 %s ” ------------------'%db
     try:
         conn=MySQLdb.connect(**dataBaseConfig)
         print u'\n---------------------- %s ConnectDataBase Succeed ----------------------\n'%userConnectName
@@ -171,7 +176,7 @@ def kaipanTimeParse(kaipanTime,**kwargs):
         return None
     elif not kaipanTime:
         return None
-    elif isinstance(kaipanTime,(list,tuple)):
+    elif isinstance(kaipanTime,(list,tuple)): #返回最优的开盘时间
         kaipanTime=filter(lambda x:x,map(kaipanTimeParse,kaipanTime))
         if kaipanTime:
             return kaipanTime.pop()

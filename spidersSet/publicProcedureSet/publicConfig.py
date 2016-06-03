@@ -10,8 +10,8 @@ dataBaseConfig={
     'host':'localhost',
     'user':'root',
     'passwd':'123456789',
-    # 'db':'ifuwo',
-    'db':'test_database', #主要用于测试
+    'db':'ifuwo',
+    # 'db':'test_database', #主要用于测试
     'port':3306,
     'charset':'utf8'
 }
@@ -20,7 +20,7 @@ dataBaseConfig={
 kaipanTimeThreshold = (2003,1,1)
 
 
-ZERO_HOUSE=False  ### 是否需要零户型  true 需要  False 不需要
+ZERO_HOUSE=True #False  ### 是否需要零户型  true 需要  False 不需要
 
 
 
@@ -50,9 +50,9 @@ kaipanTimeParseTuple=(u'(\d{2,4})-(\d{1,2})-(\d{1,2})',
 houseAreaParseTuple=('(\d{2,3})\.\d+[m²㎡平]{1,2}','(\d{2,3})m²','(\d{2,3})㎡','(\d{2,3})平')
 
 #用于初始化的ID
-init_location_community_id=807893+100
-init_ifuwo_houselayout_id=2121012+300
-init_ifuwoext_houselayoutext_id=1511286+300
+init_location_community_id=811705+100
+init_ifuwo_houselayout_id=2135683+300
+init_ifuwoext_houselayoutext_id=1524947+300
 ##
 # 楼盘表是否要保存到新的表
 newComunityTable='location_community_copy'

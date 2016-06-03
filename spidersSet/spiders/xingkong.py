@@ -124,6 +124,9 @@ class XingkongSpider(spiderBase):
         items['houseImgUrl_list']=[]
         items['houseType_list']=[]
         items['houseArea_list']=[]
+        """
+        下面这一部分没有写好，写的过于繁琐
+        """
         for url in houseImgSubUrl_list:
             html=myGetHtml(url)
             if not html:

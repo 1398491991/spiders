@@ -30,6 +30,10 @@ class SpiderssetPipeline(object):
         initTableId(self.conn,newComunityTable,init_location_community_id)
         initTableId(self.conn,'ifuwo_houselayout',init_ifuwo_houselayout_id)
         initTableId(self.conn,'ifuwoext_houselayoutext',init_ifuwoext_houselayoutext_id)
+        if ZERO_HOUSE:
+            print u'----------------------- 保存 “零户型” ------------------------'
+        else:
+            print u'----------------------- 不保存 “零户型” ----------------------------'
     def process_item(self, item, spider):
         self.filterItem(item)
         return item
@@ -53,7 +57,7 @@ class SpiderssetPipeline(object):
         #     return False
         ###到了这里证明是新的楼盘  可以开始下载 楼盘封面了
         # communityAreaData=item['communityAreaData']
-        if not (item['houseImgUrl_list'] or ZERO_HOUSE):
+        if not (item['houseImgUrl_list'] or ZERO_HOUSE): # 零户型判别
             return
 
         folderName,UUID=downLoadImg(item[u'communityCoverUrl'],imgType=0,spidersName=item[u'spidersName'])
@@ -67,11 +71,11 @@ class SpiderssetPipeline(object):
         communityAreaId,communityArea=communityAreaData
         cityAreaName=item[u'cityAreaName']
         communityName=item[u'communityName']
-        dizhi=item[u'dizhi']
-        jieshao=item[u'jieshao']
-        kaifashang=item[u'kaifashang']
-        kaipanTime=item[u'kaipanTime']
-        wuye=item[u'wuye']
+        dizhi=item.get(u'dizhi')
+        jieshao=item.get(u'jieshao')
+        kaifashang=item.get(u'kaifashang')
+        kaipanTime=item.get(u'kaipanTime')
+        wuye=item.get(u'wuye')
         lat,lon=acquireGeographyCoordinates(communityName,cityAreaName,item[u'cityName'],dizhi)
         # 纬度 经度 的格式
         insertCommunityTuple=(0,nowTime(),nowTime(),
@@ -90,9 +94,9 @@ class SpiderssetPipeline(object):
     def insertHouseTable(self,item,communityId):
         cityName=item[u'cityName']
         communityName=item[u'communityName']
-        houseImgUrl_list=item[u'houseImgUrl_list']
-        houseType_list=item[u'houseType_list']
-        houseArea_list=item[u'houseArea_list']
+        houseImgUrl_list=item.get(u'houseImgUrl_list',[])
+        houseType_list=item.get(u'houseType_list',[])
+        houseArea_list=item.get(u'houseArea_list',[])
         ##这里的 三个列表长度必定相等  因为在  spiders 已经筛选过了
         for i,imgUrl in enumerate(houseImgUrl_list):
             #下载图片
@@ -119,7 +123,3 @@ class SpiderssetPipeline(object):
             if not houseTableSave(self.conn,insertDict):
                 ###插入错误 删除
                 deleteImg(folderName,UUID,spidersName)
-    # def close_spider(spider):
-    #     print u'******************  spider colse ********************'
-
-
