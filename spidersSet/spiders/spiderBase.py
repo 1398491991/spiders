@@ -17,3 +17,10 @@ class spiderBase(Spider):
 
     def communityHouseTypeParse(self,response):
         raise NotImplementedError
+
+    @staticmethod
+    def close(spider, reason):
+        print u'\n****************************  %s close **************************\n'%spider.name
+        closed = getattr(spider, 'closed', None)
+        if callable(closed):
+            return closed(reason)

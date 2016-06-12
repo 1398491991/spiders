@@ -21,7 +21,7 @@ class QfangwangSpider(CrawlSpider):
 
     rules = (
         #  没有callback意味着follow默认为True
-        Rule(LinkExtractor(allow=('http:/\w+\.qfang.com', ))),  ## 匹配每一个城市的  http://shanghai.qfang.com/newhouse/list
+        Rule(LinkExtractor(allow=('http://\w+\.qfang.com', ))),  ## 匹配每一个城市的  http://shanghai.qfang.com/newhouse/list
 
         Rule(LinkExtractor(allow=('/newhouse/desc/\d+', )),callback="parse_item"),
         # 匹配该的楼盘列表 http://shanghai.qfang.com/newhouse/desc/4060247

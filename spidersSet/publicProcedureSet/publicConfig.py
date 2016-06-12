@@ -10,8 +10,8 @@ dataBaseConfig={
     'host':'localhost',
     'user':'root',
     'passwd':'123456789',
-    'db':'ifuwo',
-    # 'db':'test_database', #主要用于测试
+    # 'db':'ifuwo', ## 正式数据库
+    'db':'test_database', #主要用于测试
     'port':3306,
     'charset':'utf8'
 }
@@ -53,7 +53,7 @@ houseAreaParseTuple=('(\d{2,3})\.\d+[m²㎡平]{1,2}','(\d{2,3})m²','(\d{2,3})�
 init_location_community_id=811705+100
 init_ifuwo_houselayout_id=2135683+300
 init_ifuwoext_houselayoutext_id=1524947+300
-##
+
 # 楼盘表是否要保存到新的表
 newComunityTable='location_community_copy'
 
